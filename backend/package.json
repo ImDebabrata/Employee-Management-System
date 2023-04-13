@@ -1,0 +1,19 @@
+{
+  "name": "ems",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "node generateData.js > database.json",
+    "server": "json-server --watch ./server/database.json",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mockjs": "^1.1.0",
+    "uuid": "^9.0.0"
+  }
+}
