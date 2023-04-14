@@ -1,15 +1,13 @@
 import { useState } from "react";
 import "./App.css";
-import AddEmployee from "./pages/AddEmployee";
 import Navbar from "./components/Navbar";
-import AllEmployee from "./pages/AllEmployee";
+import AllRoutes from "./pages/AllRoutes";
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      {/* <AddEmployee /> */}
-      <AllEmployee />
+      <AllRoutes />
     </div>
   );
 }

@@ -12,6 +12,7 @@ import {
   ListItemText,
   Box,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -54,18 +55,22 @@ const Navbar = () => {
           onKeyDown={handleDrawerClose}
         >
           <List>
-            <ListItem button>
-              <ListItemIcon>
-                <PersonAddIcon />
-              </ListItemIcon>
-              <ListItemText primary="Add User" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <VisibilityIcon />
-              </ListItemIcon>
-              <ListItemText primary="View Users" />
-            </ListItem>
+            <Link to={"/"}>
+              <ListItem button>
+                <ListItemIcon>
+                  <PersonAddIcon />
+                </ListItemIcon>
+                <ListItemText primary="Add User" />
+              </ListItem>
+            </Link>
+            <Link to={"/employees"}>
+              <ListItem button>
+                <ListItemIcon>
+                  <VisibilityIcon />
+                </ListItemIcon>
+                <ListItemText primary="View Users" />
+              </ListItem>
+            </Link>
           </List>
         </Box>
       </Drawer>
