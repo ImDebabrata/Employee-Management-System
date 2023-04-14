@@ -20,6 +20,8 @@ const hobbiesList = [
 
 Mock.Random.shuffle(hobbiesList);
 
+const genders = ["Male", "Female", "Transgender"];
+
 for (let i = 0; i < 40; i++) {
   database.users.push(
     Mock.mock({
@@ -28,7 +30,7 @@ for (let i = 0; i < 40; i++) {
       email: "@email",
       phone: "@integer(10000000000,99999999999)",
       dob: "@date",
-      gender: "@gender",
+      gender: "@pick(" + genders + ")",
       hobbies: Mock.Random.pick(hobbiesList, 3),
     })
   );
