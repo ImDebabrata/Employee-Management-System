@@ -3,13 +3,28 @@ import { Box, Typography, Avatar, CssBaseline, Container } from "@mui/material";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import UserForm from "../components/UserForm";
+import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 
 const theme = createTheme();
 
 const AddEmployee = () => {
   const handleSubmit = (user) => {
+    user.hobbies = Object.entries(user.hobbies)
+      .filter(([name, selected]) => selected)
+      .map(([name, selected]) => name);
+    user.id = uuidv4();
     console.log("user:", user);
     // Show a form to update the user data
+    axios
+      .post("http://localhost:3000/users", user)
+      .then((res) => {
+        alert("Created user successfully");
+      })
+      .catch((err) => {
+        alert("Something went wrong");
+        console.log(err);
+      });
   };
   return (
     <ThemeProvider theme={theme}>

@@ -46,7 +46,7 @@ const UserForm = ({ user, onSubmit }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit({ name, email, phone, dob, gender, hobbies });
+    onSubmit({ name, email, phone, dob, gender, hobbies, id: user.id || null });
     // console.log({ name, email, phone, dob, gender, hobbies });
   };
   return (
@@ -159,7 +159,7 @@ const UserForm = ({ user, onSubmit }) => {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={hobbies.cooking}
+                    checked={hobbies.travelling}
                     onChange={handleHobbiesChange}
                     name="travelling"
                   />

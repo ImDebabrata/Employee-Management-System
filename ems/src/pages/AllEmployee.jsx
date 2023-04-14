@@ -23,14 +23,43 @@ const AllEmployee = () => {
   const [component, setComponent] = useState(null);
 
   const handleDelete = (userId) => {
+    axios
+      .delete(`http://localhost:3000/users/${userId}`)
+      .then((res) => {
+        alert("User Deleted Successfully");
+        const newList = users.filter((item) => item.id !== userId);
+        setUsers(newList);
+      })
+      .catch((err) => {
+        alert("Something went wrong");
+        console.log(err);
+      });
     setOpen(false);
-    console.log("userId:", userId);
     // Delete the user with the given userId
   };
 
   const handleUpdate = (user) => {
+    user.hobbies = Object.entries(user.hobbies)
+      .filter(([name, selected]) => selected)
+      .map(([name, selected]) => name);
+    axios
+      .patch(`http://localhost:3000/users/${user.id}`, user)
+      .then((res) => {
+        alert("Updated Successfully");
+        //Updating the user in the dom
+        let updatedUser = users.find((item) => item.id === user.id);
+        const userIndex = users.indexOf(updatedUser);
+        updatedUser = user;
+        users.splice(userIndex, 1, updatedUser);
+        //creating new array for dom updating
+        const newArr = [...users];
+        setUsers(newArr);
+      })
+      .catch((err) => {
+        alert("Something went wrong");
+        console.log(err);
+      });
     setOpen(false);
-    console.log("user:", user);
     // Show a form to update the user data
   };
 
@@ -45,9 +74,7 @@ const AllEmployee = () => {
     console.log(id);
   };
   useEffect(() => {
-    axios
-      .get("https://emsystem.glitch.me/users")
-      .then((res) => setUsers(res.data));
+    axios.get("http://localhost:3000/users").then((res) => setUsers(res.data));
   }, []);
   return (
     <>
