@@ -17,7 +17,7 @@ const AddEmployee = () => {
     console.log("user:", user);
     // Show a form to update the user data
     axios
-      .post("http://localhost:3000/users", user)
+      .post("https://emsystem.glitch.me/", user)
       .then((res) => {
         alert("Created user successfully");
       })

@@ -24,7 +24,7 @@ const AllEmployee = () => {
 
   const handleDelete = (userId) => {
     axios
-      .delete(`http://localhost:3000/users/${userId}`)
+      .delete(`https://emsystem.glitch.me/users/${userId}`)
       .then((res) => {
         alert("User Deleted Successfully");
         const newList = users.filter((item) => item.id !== userId);
@@ -43,7 +43,7 @@ const AllEmployee = () => {
       .filter(([name, selected]) => selected)
       .map(([name, selected]) => name);
     axios
-      .patch(`http://localhost:3000/users/${user.id}`, user)
+      .patch(`https://emsystem.glitch.me/users/${user.id}`, user)
       .then((res) => {
         alert("Updated Successfully");
         //Updating the user in the dom
@@ -74,7 +74,9 @@ const AllEmployee = () => {
     console.log(id);
   };
   useEffect(() => {
-    axios.get("http://localhost:3000/users").then((res) => setUsers(res.data));
+    axios
+      .get("https://emsystem.glitch.me/users")
+      .then((res) => setUsers(res.data));
   }, []);
   return (
     <>
