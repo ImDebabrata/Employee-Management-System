@@ -7,9 +7,13 @@ import UserForm from "../components/UserForm";
 const theme = createTheme();
 
 const AddEmployee = () => {
+  const handleSubmit = (user) => {
+    console.log("user:", user);
+    // Show a form to update the user data
+  };
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="sm">
         <CssBaseline />
         <Box
           sx={{
@@ -25,7 +29,7 @@ const AddEmployee = () => {
           <Typography component="h1" variant="h5">
             Register New User
           </Typography>
-          <UserForm />
+          <UserForm onSubmit={handleSubmit} />
         </Box>
       </Container>
     </ThemeProvider>

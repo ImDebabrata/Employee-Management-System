@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -13,18 +13,32 @@ import {
   Box,
 } from "@mui/material";
 
-const UserForm = () => {
+const UserForm = ({ user, onSubmit }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
   const [hobbies, setHobbies] = useState({
-    reading: false,
+    coding: false,
     writing: false,
     gaming: false,
-    cooking: false,
+    travelling: false,
   });
+
+  useEffect(() => {
+    setName(user?.name || "");
+    setEmail(user?.email || "");
+    setPhone(user?.phone || "");
+    setDob(user?.dob || "");
+    setGender(user?.gender || "");
+    setHobbies({
+      coding: user?.hobbies.includes("coding") || false,
+      writing: user?.hobbies.includes("writing") || false,
+      gaming: user?.hobbies.includes("gaming") || false,
+      travelling: user?.hobbies.includes("travelling") || false,
+    });
+  }, [user]);
 
   const handleHobbiesChange = (event) => {
     setHobbies({ ...hobbies, [event.target.name]: event.target.checked });
@@ -32,10 +46,16 @@ const UserForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({ name, email, phone, dob, gender, hobbies });
+    onSubmit({ name, email, phone, dob, gender, hobbies });
+    // console.log({ name, email, phone, dob, gender, hobbies });
   };
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{ mt: 1 }}
+      padding={"40px 40px 0 40px"}
+    >
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -95,9 +115,9 @@ const UserForm = () => {
                 label="Female"
               />
               <FormControlLabel
-                value="other"
+                value="transgender"
                 control={<Radio />}
-                label="Other"
+                label="Transgender"
               />
             </RadioGroup>
           </FormControl>
@@ -109,12 +129,12 @@ const UserForm = () => {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={hobbies.reading}
+                    checked={hobbies.coding}
                     onChange={handleHobbiesChange}
-                    name="reading"
+                    name="coding"
                   />
                 }
-                label="Reading"
+                label="Coding"
               />
               <FormControlLabel
                 control={
@@ -141,17 +161,17 @@ const UserForm = () => {
                   <Checkbox
                     checked={hobbies.cooking}
                     onChange={handleHobbiesChange}
-                    name="cooking"
+                    name="travelling"
                   />
                 }
-                label="Cooking"
+                label="Travelling"
               />
             </FormGroup>
           </FormControl>
         </Grid>
         <Grid item xs={12}>
           <Button type="submit" variant="contained" color="primary" fullWidth>
-            Register
+            {user ? "Update" : "Register"}
           </Button>
         </Grid>
       </Grid>
